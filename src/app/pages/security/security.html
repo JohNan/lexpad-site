@@ -1,0 +1,65 @@
+<section class="security-page">
+  <div class="security-header">
+    <span class="page-badge">Zero-Trust Architecture</span>
+    <h1>Security & Privacy Architecture</h1>
+    <p>
+      LexPad is engineered from the ground up for total on-device confidentiality, zero-middleman data isolation, and hardware-backed biometric protection.
+    </p>
+  </div>
+
+  <div class="security-grid">
+    <app-feature-card
+      icon="lock"
+      title="100% Local On-Device Buffer Store"
+      description="Scratchpad buffers, unsaved drafts, and document metadata are stored strictly within the app's sandboxed internal storage (filesDir/buffers/). No note or code snippet is ever uploaded to external cloud servers."
+    ></app-feature-card>
+
+    <app-feature-card
+      icon="cloud_off"
+      title="Zero Nanzen Cloud Servers"
+      description="LexPad operates completely without proprietary backends, telemetry proxies, or cloud relays. Your files, documents, and system interactions remain private to your Android device."
+    ></app-feature-card>
+
+    <app-feature-card
+      icon="vpn_key"
+      title="Scoped Android SAF Permissions"
+      description="External file access is governed exclusively through the native Android Storage Access Framework (OpenDocument / CreateDocument). LexPad never requests broad, intrusive filesystem permissions."
+    ></app-feature-card>
+
+    <app-feature-card
+      icon="fingerprint"
+      title="Hardware-Backed BiometricPrompt Lock"
+      description="Guard sensitive buffers behind hardware-isolated BiometricPrompt authentication. Biometric templates are validated locally by the Android Keystore / Secure Enclave and never leave the device."
+    ></app-feature-card>
+
+    <app-feature-card
+      icon="memory"
+      title="Bounded 25 MB URI Reader Defense"
+      description="BoundedUriReader enforces strict memory-window limits on input streams, shielding the app from Out-Of-Memory exploits or device lockups when inspecting massive logs or corrupt data dumps."
+    ></app-feature-card>
+
+    <app-feature-card
+      icon="code"
+      title="Linear/ICU-Safe BitSet Syntax Engine"
+      description="The :editor-core lexer uses non-overlapping BitSet span tracking to guarantee linear execution time and bounded memory usage, preventing ReDoS vulnerabilities during real-time tokenization."
+    ></app-feature-card>
+
+    <app-feature-card
+      icon="build_circle"
+      title="Ephemeral In-Memory Dev Tools"
+      description="URL percent-encoding, query parameter parsing, and JSON formatting/minification execute entirely in-memory within local device processes without disk persistence or third-party API calls."
+    ></app-feature-card>
+
+    <app-feature-card
+      icon="system_update"
+      title="Signed Google Play In-App Updates"
+      description="Cryptographically verified app updates arrive directly through Google Play In-App Updates (Immediate priority for security fixes, flexible background for regular releases)."
+    ></app-feature-card>
+
+    <app-feature-card
+      icon="policy"
+      title="Audited Open-Source Licenses"
+      description="Built upon audited open-source foundations with zero shady trackers. A built-in Open Source License viewer provides complete transparency regarding all runtime dependencies."
+    ></app-feature-card>
+  </div>
+</section>

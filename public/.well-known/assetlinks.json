@@ -1,0 +1,16 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.johnan.lexpad",
+      "sha256_cert_fingerprints": [
+        "E3:0F:65:C8:73:C5:0A:3B:03:DA:EE:8D:0F:25:19:01:22:BC:D7:53:B0:C2:00:31:E7:21:D9:1E:12:A9:E3:74",
+        "A4:69:2F:7C:D6:A2:75:5C:D9:D5:ED:13:09:17:A8:A5:EF:6F:5D:B6:7C:C7:1C:05:DA:31:4C:DA:F1:AF:80:C4"
+      ]
+    }
+  }
+]

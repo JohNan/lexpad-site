@@ -1,0 +1,174 @@
+<section class="showcase-section">
+  <div class="showcase-header">
+    <h2>App Screenshot Gallery</h2>
+    <p>
+      Explore production Jetpack Compose screenshots of LexPad across polyglot code editing,
+      Markdown authoring, regex refactoring, and developer tools.
+    </p>
+
+    <!-- Screenshot Theme Switcher -->
+    <div class="theme-mode-bar">
+      <span class="mode-label">Screenshot Theme:</span>
+      <div class="mode-toggle">
+        <button
+          type="button"
+          class="mode-btn"
+          [class.active]="activeThemeMode === 'light'"
+          (click)="setThemeMode('light')"
+        >
+          <span class="material-icons" aria-hidden="true">light_mode</span> Light
+        </button>
+        <button
+          type="button"
+          class="mode-btn"
+          [class.active]="activeThemeMode === 'dark'"
+          (click)="setThemeMode('dark')"
+        >
+          <span class="material-icons" aria-hidden="true">dark_mode</span> Dark
+        </button>
+        <button
+          type="button"
+          class="mode-btn"
+          [class.active]="activeThemeMode === 'auto'"
+          (click)="setThemeMode('auto')"
+          title="Match System/Site Theme"
+        >
+          <span class="material-icons" aria-hidden="true">brightness_auto</span> Auto
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Pills Navigation -->
+  <div class="category-pills" role="tablist" aria-label="Screenshot Categories">
+    @for (cat of categories; track cat.id) {
+      <button
+        type="button"
+        class="pill-btn"
+        [class.active]="selectedCategory === cat.id"
+        (click)="setCategory(cat.id)"
+        role="tab"
+        [attr.aria-selected]="selectedCategory === cat.id"
+      >
+        {{ cat.label }}
+      </button>
+    }
+  </div>
+
+  <!-- Screenshot Grid -->
+  <div class="showcase-grid">
+    @for (item of filteredScreenshots; track item.id) {
+      <div
+        class="screenshot-card"
+        (click)="openModal(item)"
+        (keydown.enter)="openModal(item)"
+        (keydown.space)="$event.preventDefault(); openModal(item)"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="'View ' + item.title + ' screenshot in full screen'"
+      >
+        <!-- Authentic Android Device Frame -->
+        <div class="phone-frame">
+          <div class="side-btn power-btn"></div>
+          <div class="side-btn volume-btn"></div>
+          <div class="camera-punch-hole"></div>
+          <div class="screen-wrapper">
+            <img
+              [src]="getImagePath(item)"
+              [alt]="item.title"
+              width="1080"
+              height="2340"
+              loading="lazy"
+              class="screenshot-img"
+            />
+          </div>
+          <div class="android-gesture-bar"></div>
+        </div>
+
+        <!-- Meta Info -->
+        <div class="card-info">
+          @if (item.badge) {
+            <span class="card-badge">{{ item.badge }}</span>
+          }
+          <h3 class="card-title">{{ item.title }}</h3>
+          <p class="card-desc">{{ item.description }}</p>
+          <div class="card-action">
+            <span class="expand-text">Click to view full screen</span>
+            <span class="material-icons expand-icon" aria-hidden="true">zoom_in</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Fullscreen Lightbox Modal -->
+@if (activeModalItem) {
+  <div
+    class="modal-backdrop"
+    (click)="closeModal()"
+    (keydown.enter)="closeModal()"
+    tabindex="0"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Screenshot lightbox modal"
+  >
+    <div
+      class="modal-content"
+      (click)="$event.stopPropagation()"
+      (keydown.enter)="$event.stopPropagation()"
+      tabindex="0"
+      role="document"
+    >
+      <button type="button" class="modal-close" (click)="closeModal()" aria-label="Close Preview">
+        <span class="material-icons" aria-hidden="true">close</span>
+      </button>
+
+      <button
+        type="button"
+        class="nav-btn prev-btn"
+        (click)="navigateModal(-1)"
+        aria-label="Previous View"
+      >
+        <span class="material-icons" aria-hidden="true">chevron_left</span>
+      </button>
+
+      <div class="modal-body">
+        <div class="modal-device-frame">
+          <div class="side-btn power-btn"></div>
+          <div class="side-btn volume-btn"></div>
+          <div class="camera-punch-hole"></div>
+          <div class="screen-wrapper">
+            <img
+              [src]="getImagePath(activeModalItem)"
+              [alt]="activeModalItem.title"
+              width="1080"
+              height="2340"
+              class="modal-img"
+            />
+          </div>
+          <div class="android-gesture-bar"></div>
+        </div>
+        <div class="modal-details">
+          @if (activeModalItem.badge) {
+            <span class="card-badge">{{ activeModalItem.badge }}</span>
+          }
+          <h2>{{ activeModalItem.title }}</h2>
+          <p>{{ activeModalItem.description }}</p>
+          <div class="modal-theme-toggle">
+            <span>Viewing Mode: <strong>{{ effectiveTheme | titlecase }} Theme</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="nav-btn next-btn"
+        (click)="navigateModal(1)"
+        aria-label="Next View"
+      >
+        <span class="material-icons" aria-hidden="true">chevron_right</span>
+      </button>
+    </div>
+  </div>
+}

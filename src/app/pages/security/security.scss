@@ -1,0 +1,44 @@
+.security-page {
+  padding: 4rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .security-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+
+    .page-badge {
+      display: inline-block;
+      background: var(--color-accent-badge-bg);
+      color: var(--color-primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      font-size: clamp(1.85rem, 1.4rem + 1.8vw, 2.6rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1.15rem;
+      color: var(--color-on-background);
+      opacity: 0.85;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+  }
+
+  .security-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 1.5rem;
+  }
+}

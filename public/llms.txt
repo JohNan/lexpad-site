@@ -1,0 +1,69 @@
+# LexPad — File & Code Editor
+
+LexPad is a high-speed, production-grade Material 3 Android scratchpad, file viewer, and code/Markdown editor (`com.johnan.lexpad`, website: https://lexpad.nanzen.se/) engineered by Nanzen for software engineers, systems administrators, technical writers, and mobile developers who require desktop-class text editing, strict on-device privacy, and zero latency on mobile and foldable devices.
+
+## Core Architecture & Modular Design
+
+*   **Modular Clean Architecture & Unidirectional Data Flow (UDF):** Built with strict separation of concerns into standalone reusable modules published as Maven artifacts:
+    *   **`:editor-core` (`io.github.johnan:editor-core`):** Pure Kotlin JVM library (`kotlin("jvm")`) with zero Android SDK or Compose dependencies. Houses high-performance lexers, search engines, parser ASTs, and text manipulation tools. Can be embedded in server, desktop, or command-line Kotlin toolchains.
+    *   **`:editor-ui` (`io.github.johnan:editor-ui`):** Reusable Android Jetpack Compose UI component library. Has zero Koin, Room, Billing, or app-navigation dependencies, allowing sibling applications (such as Nanzen's `ssh-app-poc` / `ssh-client`) to directly embed the editor, gutter, symbol toolbar, and Markdown preview surfaces.
+    *   **`:app` (`com.johnan.lexpad`):** Android application module orchestrating Room database metadata, DataStore preferences, Storage Access Framework (SAF) file streaming, BiometricPrompt authentication, and Google Play In-App Billing/Updates.
+*   **Polyglot Syntax Engine (`SyntaxLexer` & `LanguageDetector`):**
+    *   Custom deterministic token lexer supporting 16+ syntax grammars: Kotlin, Java, Python, JavaScript, TypeScript, HTML, CSS, JSON, XML, YAML, Markdown, SQL, Shell/Bash, Rust, Go, and C/C++.
+    *   Automated language detection analyzing file extensions and paste content heuristics.
+    *   Memory-efficient `BitSet` non-overlapping span safety ensuring highlighting spans never collide or cause unbounded memory allocations.
+*   **Instant Multi-Tab Scratchpad & Native File System (SAF):**
+    *   Zero-ceremony multi-tab scratchpad workspace persisting live buffers to private internal sandboxed storage (`filesDir/buffers/`).
+    *   Direct in-place file editing via Android Storage Access Framework (`ACTION_OPEN_DOCUMENT`, `ACTION_CREATE_DOCUMENT`, and `ACTION_PROCESS_TEXT` system text selection integration).
+    *   Zero Nanzen cloud servers, zero external proxies, and zero intermediary storage—100% of user files remain strictly on-device.
+
+## Key Features & Studio Capabilities
+
+### 1. Code Editor Surface & Viewport Virtualization
+*   **`CodeEditorSurface`:** High-performance Compose text editor powered by `BasicTextField(state = TextFieldState, outputTransformation = ...)` with dedicated `UndoState` management.
+*   **Viewport-Culled Line Gutter:** Hardware-accelerated `Canvas` line gutter rendering line numbers with dynamic viewport culling, calculating only the lines currently visible on-screen to sustain 120 FPS scrolling on large buffers.
+*   **Docked Quick-Symbol Toolbar:** Context-aware horizontal toolbar providing single-tap access to frequently used programming symbols, brackets, indentation keys, and operators (`{`, `}`, `[`, `]`, `(`, `)`, `;`, `->`, `=`, `"`, `'`).
+*   **Match Auto-Scroll:** Interactive search result auto-scrolling that centers the current match directly in the visible viewport.
+
+### 2. CommonMark & GitHub Flavored Markdown (GFM) Studio
+*   **`MarkdownDocumentParser`:** AST wrapper leveraging `org.jetbrains:markdown` and `GFMFlavourDescriptor` for strict compliance with CommonMark and GitHub Flavored Markdown specifications.
+*   **Rich GFM Element Rendering:** Full support for tables, blockquotes, syntax-highlighted code blocks, alert callouts (`[!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!WARNING]`, `[!CAUTION]`), and strikethrough.
+*   **Interactive Task Checklists:** Interactive Markdown checkboxes (`- [ ]`, `- [x]`) that toggle state in-place with instant buffer synchronization.
+*   **Adaptive Split-Screen Workspace:** `AdaptiveMarkdownWorkspace` dynamically switches between side-by-side split view on tablets/foldables (landscape) and fluid swipeable tabs on compact portrait phones.
+
+### 3. Search, Regex & Developer Utilities
+*   **`TextSearchEngine`:** Production-grade search and replace engine supporting raw substring matches, case-sensitive matching (`matchCase`), whole word matching (`wholeWord`), and full regular expressions (`useRegex`).
+*   **Capture-Group Replacement:** Powerful regex substitution supporting backreferences and capture groups (`$1`, `$2`, etc.) with real-time match indexing and count indicators.
+*   **`UrlTextTools`:** RFC 3986 percent-encoding and decoding, plus structured URL query parameter multi-line splitting and joining for API debugging.
+*   **`JsonTextTools`:** Strict JSON pretty-printing and minification powered by `kotlinx-serialization-json`.
+
+### 4. Large File Viewer (`1 MB–25 MB`)
+*   **`LargeFileViewerSurface`:** Virtualized `LazyColumn` viewer designed for inspecting large log files, database dumps, and trace files ranging from 1 MB to 25 MB without triggering Out-Of-Memory (OOM) errors.
+*   **`BoundedUriReader`:** OOM-safe streaming reader with memory-guarded buffer windows preventing application crashes when handling massive files on low-memory Android hardware.
+
+### 5. Security & Biometrics
+*   **Hardware-Backed Biometric Lock:** Guard sensitive notes and source code behind AndroidX `BiometricPrompt` (fingerprint, 3D face unlock) backed by the Android Keystore / Secure Enclave with device credential fallback.
+*   **Zero-Network Privacy Architecture:** LexPad requires zero proprietary server connectivity. Documents, scratchpads, and cryptographic keys never leave the local device sandbox.
+
+### 6. LexPad Pro Toolkit
+*   **Studio Color Palettes:** High-contrast professional developer palettes including Dracula, Nord Dark, Solarized, and Electric Indigo & Obsidian Slate.
+*   **Advanced Regex & Utilities Unlock:** Unrestricted regex capture-group batch replacement, advanced multi-line URL query editing, and automated JSON payload repair.
+*   **Flexible Licensing:** Available via Google Play In-App Purchases as either a lifetime unlock (`pro_version_unlock`) or monthly subscription (`pro_subscription_monthly`).
+
+## Technical Specifications
+
+*   **Application ID:** `com.johnan.lexpad`
+*   **Platform:** Android 13+ (API level 33+)
+*   **UI Framework:** Jetpack Compose (Material 3), Light & Dark Theme, dynamic adaptive layouts for phones, foldables, and tablets.
+*   **Architecture:** Clean Architecture, MVI/UDF, pure Kotlin JVM `:editor-core`, Android Compose `:editor-ui`.
+*   **Localization (5 Locales):** English (`en-US`), German (`de-DE`), Spanish (`es-ES`), French (`fr-FR`), Swedish (`sv-SE`).
+*   **Updates & Billing:** Google Play In-App Updates (Immediate priority for critical bug fixes, flexible background for regular releases) and Google Play In-App Purchases.
+
+## Related Products by Nanzen
+
+*   **SQL Pulse — Android SQL Database Studio:** Production-grade Android MySQL & MariaDB client with wire protocol v10 coroutine engine, interactive SQL studio, visual EXPLAIN cost trees, virtualized 2D table data grid, and SSH bastion tunneling.
+    *   Website: https://sql-pulse.nanzen.se/
+    *   Package Name: `com.johnan.mysqlclient`
+*   **Android SSH Client:** High-performance native Android SSH & SFTP client featuring an advanced terminal emulator (XTerm-256, TrueColor, Kitty graphics protocol), remote code/config editor, dynamic SOCKS5/remote port forwarding, Sentinel tapjacking defense, and hardware Keystore authentication.
+    *   Website: https://ssh-client.nanzen.se/
+    *   Package Name: `com.johnan.sshclient`

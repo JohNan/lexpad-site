@@ -1,0 +1,62 @@
+<header class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/" class="logo">
+      <img src="favicon.svg" alt="" width="34" height="34" class="brand-logo-img" />
+      <span>LexPad</span>
+    </a>
+  </div>
+  <nav class="navbar-links" aria-label="Primary">
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      ariaCurrentWhenActive="page"
+      >Home</a
+    >
+    <a routerLink="/features" routerLinkActive="active" ariaCurrentWhenActive="page">Features</a>
+    <a routerLink="/security" routerLinkActive="active" ariaCurrentWhenActive="page">Security</a>
+    <a routerLink="/privacy-policy" routerLinkActive="active" ariaCurrentWhenActive="page"
+      >Privacy Policy</a
+    >
+    <a
+      href="https://sql-pulse.nanzen.se/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="cross-site-link"
+      title="SQL Pulse — Android MySQL & MariaDB Studio"
+    >
+      <span>SQL Pulse</span>
+      <span class="material-icons external-icon" aria-hidden="true">open_in_new</span>
+    </a>
+    <a
+      href="https://ssh-client.nanzen.se/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="cross-site-link"
+      title="Android SSH & SFTP Client"
+    >
+      <span>SSH Client</span>
+      <span class="material-icons external-icon" aria-hidden="true">open_in_new</span>
+    </a>
+  </nav>
+  <div class="navbar-actions">
+    <button
+      type="button"
+      class="theme-toggle"
+      (click)="themeService.toggleTheme()"
+      [attr.aria-label]="
+        themeService.isDarkMode() ? 'Switch to light theme' : 'Switch to dark theme'
+      "
+      [title]="themeService.isDarkMode() ? 'Switch to light theme' : 'Switch to dark theme'"
+    >
+      @if (themeService.isDarkMode()) {
+        <span class="material-icons" aria-hidden="true">light_mode</span>
+        <span>Light</span>
+      }
+      @if (!themeService.isDarkMode()) {
+        <span class="material-icons" aria-hidden="true">dark_mode</span>
+        <span>Dark</span>
+      }
+    </button>
+  </div>
+</header>

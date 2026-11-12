@@ -1,0 +1,167 @@
+<section class="features-page">
+  <div class="features-header">
+    <span class="page-badge">Editor Architecture</span>
+    <h1>LexPad Feature Matrix</h1>
+    <p>Explore the high-speed, zero-compromise engineering powering LexPad — the modular Material 3 scratchpad, code editor, and Markdown studio for Android.</p>
+  </div>
+
+  <!-- Category 1: Polyglot Code Engine (:editor-core) -->
+  <section class="feature-category-section">
+    <div class="category-title">
+      <span class="material-icons" aria-hidden="true">terminal</span>
+      <h2>Polyglot Code Engine (:editor-core)</h2>
+    </div>
+    <div class="features-grid">
+      <app-feature-card
+        icon="code"
+        title="16+ Syntax Grammars"
+        description="Deterministic token lexer in pure Kotlin JVM (:editor-core) supporting Kotlin, Java, Python, JavaScript, TypeScript, HTML, CSS, JSON, XML, YAML, Markdown, SQL, Shell, Rust, Go, and C/C++ with BitSet non-overlapping span safety."
+      ></app-feature-card>
+      <app-feature-card
+        icon="auto_fix_high"
+        title="Paste Content Heuristics"
+        description="Automated language detector identifies file extensions and inspects syntax heuristics on pasted snippets to instantly apply the correct syntax grammar and color highlighting."
+      ></app-feature-card>
+      <app-feature-card
+        icon="format_list_numbered"
+        title="Viewport-Culled Line Gutter & Undo/Redo"
+        description="Hardware-accelerated Canvas gutter calculates only lines visible in the active viewport for steady 120 FPS scrolling, integrated with deep UndoState history."
+      ></app-feature-card>
+      <app-feature-card
+        icon="data_array"
+        title="Docked Quick-Symbol Toolbar"
+        description="Contextual horizontal symbol bar pinned above the keyboard provides single-tap access to frequent programming characters, brackets, indentation keys, and operators."
+      ></app-feature-card>
+    </div>
+  </section>
+
+  <!-- Category 2: Instant Scratchpad & Native File Access -->
+  <section class="feature-category-section">
+    <div class="category-title">
+      <span class="material-icons" aria-hidden="true">tab</span>
+      <h2>Instant Scratchpad & Native File Access</h2>
+    </div>
+    <div class="features-grid">
+      <app-feature-card
+        icon="note_add"
+        title="Zero-Ceremony Multi-Tab Scratchpads"
+        description="Create, switch, and reorder concurrent scratchpad tabs instantly without saving prompts. Buffers are automatically persisted to sandboxed internal storage in filesDir/buffers/."
+      ></app-feature-card>
+      <app-feature-card
+        icon="folder_open"
+        title="Direct SAF In-Place Editing"
+        description="Seamless Android Storage Access Framework integration with OpenDocument and CreateDocument. Stream and save files directly at their original device or cloud storage locations."
+      ></app-feature-card>
+      <app-feature-card
+        icon="share"
+        title="System Share & PROCESS_TEXT Integration"
+        description="Highlight text in any third-party Android app and send it directly to a LexPad buffer via the native ACTION_PROCESS_TEXT selection menu or system share sheet."
+      ></app-feature-card>
+    </div>
+  </section>
+
+  <!-- Category 3: CommonMark & GFM Markdown Studio -->
+  <section class="feature-category-section">
+    <div class="category-title">
+      <span class="material-icons" aria-hidden="true">edit_note</span>
+      <h2>CommonMark & GFM Markdown Studio</h2>
+    </div>
+    <div class="features-grid">
+      <app-feature-card
+        icon="table_chart"
+        title="GFM Tables, Alerts & Strikethrough"
+        description="Complete GitHub Flavored Markdown AST rendering with MarkdownDocumentParser, including formatted tables, blockquotes, code blocks, strikethrough, and GitHub alert callouts."
+      ></app-feature-card>
+      <app-feature-card
+        icon="checklist"
+        title="Interactive Task Checklists"
+        description="Tap interactive task checkboxes in the rendered preview to toggle Markdown checklist states in real time, with immediate bidirectional synchronization to the raw editor buffer."
+      ></app-feature-card>
+      <app-feature-card
+        icon="vertical_split"
+        title="Adaptive Split-Screen Workspace"
+        description="AdaptiveMarkdownWorkspace automatically renders side-by-side editing and preview on foldables and tablets in landscape, or sleek swipeable tabs on compact smartphones."
+      ></app-feature-card>
+    </div>
+  </section>
+
+  <!-- Category 4: Search, Regex & Developer Utilities -->
+  <section class="feature-category-section">
+    <div class="category-title">
+      <span class="material-icons" aria-hidden="true">search</span>
+      <h2>Search, Regex & Developer Utilities</h2>
+    </div>
+    <div class="features-grid">
+      <app-feature-card
+        icon="find_replace"
+        title="Regex Capture-Group Replace"
+        description="TextSearchEngine supports raw substring, case-sensitive matching, whole-word filtering, and full regular expressions with backreference capture-group substitutions."
+      ></app-feature-card>
+      <app-feature-card
+        icon="link"
+        title="RFC 3986 URL Encoder & Query Splitter"
+        description="UrlTextTools delivers one-tap RFC 3986 percent-encoding and decoding, plus multi-line query parameter breakdown and reconstruction for clean HTTP request debugging."
+      ></app-feature-card>
+      <app-feature-card
+        icon="data_object"
+        title="Strict JSON Formatter & Minifier"
+        description="JsonTextTools powered by kotlinx-serialization-json performs instant syntax validation, formatted indentation, and one-tap minification without network requests."
+      ></app-feature-card>
+    </div>
+  </section>
+
+  <!-- Category 5: Large File Inspection & Localization -->
+  <section class="feature-category-section">
+    <div class="category-title">
+      <span class="material-icons" aria-hidden="true">description</span>
+      <h2>Large File Inspection & Localization</h2>
+    </div>
+    <div class="features-grid">
+      <app-feature-card
+        icon="view_headline"
+        title="Virtualized 25 MB Log Viewer"
+        description="LargeFileViewerSurface utilizes a high-density virtualized LazyColumn engine designed to smoothly inspect 1 MB to 25 MB system logs, crash dumps, and raw data files."
+      ></app-feature-card>
+      <app-feature-card
+        icon="memory"
+        title="Bounded OOM-Safe URI Streaming"
+        description="BoundedUriReader enforces guarded memory windows during file parsing, preventing Android Out-Of-Memory exceptions even on resource-constrained hardware."
+      ></app-feature-card>
+      <app-feature-card
+        icon="translate"
+        title="5 Native Languages (EN, DE, ES, FR, SV)"
+        description="Complete UI localization across English, German, Spanish, French, and Swedish with automatic system locale matching and zero hardcoded user strings."
+      ></app-feature-card>
+    </div>
+  </section>
+
+  <!-- Category 6: LexPad Pro Toolkit -->
+  <section class="feature-category-section">
+    <div class="category-title">
+      <span class="material-icons" aria-hidden="true">workspace_premium</span>
+      <h2>LexPad Pro Toolkit</h2>
+    </div>
+    <div class="features-grid">
+      <app-feature-card
+        icon="palette"
+        title="Studio Color Palettes: Dracula & Nord Dark"
+        description="Unlock curated dark developer themes including Dracula, Nord Dark, Solarized Dark, and Electric Indigo & Obsidian Slate Material 3 palettes."
+      ></app-feature-card>
+      <app-feature-card
+        icon="manage_search"
+        title="Full Regex & Batch Replace Unlock"
+        description="Perform unrestricted batch replacements across entire documents with full regex lookahead, capture groups, and real-time match indexing."
+      ></app-feature-card>
+      <app-feature-card
+        icon="build_circle"
+        title="Multi-Line URL & JSON Power Tools"
+        description="Deep developer utility suite enabling multi-line URL query mutation, key-value sorting, and automated JSON structure formatting directly in the workspace."
+      ></app-feature-card>
+      <app-feature-card
+        icon="fingerprint"
+        title="Biometric App Lock & Adaptive Split-Screen"
+        description="Protect private notes and sensitive code behind hardware-backed BiometricPrompt authentication, plus permanent side-by-side Markdown split view across all orientations."
+      ></app-feature-card>
+    </div>
+  </section>
+</section>
