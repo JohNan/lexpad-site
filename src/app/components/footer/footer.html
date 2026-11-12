@@ -1,0 +1,42 @@
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <img src="favicon.svg" alt="" width="28" height="28" loading="lazy" class="footer-logo-img" />
+      <span class="footer-brand-title">LexPad — File, Code &amp; Markdown Editor for Android</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer Navigation">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+        >Home</a
+      >
+      <a routerLink="/features" routerLinkActive="active" ariaCurrentWhenActive="page">Features</a>
+      <a routerLink="/security" routerLinkActive="active" ariaCurrentWhenActive="page">Security</a>
+      <a routerLink="/privacy-policy" routerLinkActive="active" ariaCurrentWhenActive="page"
+        >Privacy Policy</a
+      >
+      <a routerLink="/terms" routerLinkActive="active" ariaCurrentWhenActive="page">Terms</a>
+      <a
+        href="https://sql-pulse.nanzen.se/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cross-site-footer-link"
+      >
+        SQL Pulse for Android &#8599;
+      </a>
+      <a
+        href="https://ssh-client.nanzen.se/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cross-site-footer-link"
+      >
+        SSH Client for Android &#8599;
+      </a>
+    </nav>
+    <div class="footer-copyright">
+      &copy; {{ currentYear }} Nanzen — LexPad. All rights reserved.
+    </div>
+  </div>
+</footer>

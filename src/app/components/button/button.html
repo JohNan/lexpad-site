@@ -1,0 +1,25 @@
+@if (href) {
+  <a
+    [href]="href"
+    [target]="target || '_self'"
+    [class]="'btn ' + variant"
+    [class.disabled]="disabled"
+    (click)="onClick($event)"
+    rel="noopener noreferrer"
+  >
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </a>
+} @else {
+  <button
+    [type]="type"
+    [class]="'btn ' + variant"
+    [disabled]="disabled"
+    (click)="onClick($event)"
+  >
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </button>
+}
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>

@@ -1,0 +1,136 @@
+<section class="hero-section">
+  <div class="hero-content">
+    <div class="hero-app-badge">
+      <img src="favicon.svg" alt="" width="22" height="22" class="hero-badge-logo" />
+      <span>Material 3 Android Code, Markdown &amp; File Studio</span>
+    </div>
+    <h1>LexPad — File &amp; Code Editor</h1>
+    <p>
+      Instant multi-tab scratchpad, 16+ language syntax highlighter, split-screen CommonMark/GFM
+      Markdown preview, regex search &amp; replace, RFC 3986 URL/JSON developer utilities, and
+      25&nbsp;MB log inspection—100% local on your Android device.
+    </p>
+    <div class="hero-actions">
+      <app-button
+        variant="primary"
+        href="https://play.google.com/store/apps/details?id=com.johnan.lexpad"
+        target="_blank"
+      >
+        <span class="material-icons" aria-hidden="true">get_app</span>
+        <span>Download on Google Play</span>
+      </app-button>
+      <app-button variant="secondary" href="/features">
+        <span class="material-icons" aria-hidden="true">auto_awesome</span>
+        <span>Explore Features</span>
+      </app-button>
+    </div>
+  </div>
+  <div class="hero-mockup">
+    <div class="hero-phone-frame">
+      <div class="side-btn power-btn"></div>
+      <div class="side-btn volume-btn"></div>
+      <div class="camera-punch-hole"></div>
+      <div class="screen-wrapper">
+        <img
+          [src]="
+            themeService.isDarkMode()
+              ? 'screenshots/code_editor_dark.png'
+              : 'screenshots/code_editor_light.png'
+          "
+          alt="LexPad multi-tab Kotlin code editor with syntax highlighting and quick-symbol toolbar"
+          fetchpriority="high"
+          width="1080"
+          height="2340"
+          class="hero-screen-img"
+        />
+      </div>
+      <div class="android-gesture-bar"></div>
+    </div>
+  </div>
+</section>
+
+<section class="value-prop-section">
+  <h2>Why Developers Choose LexPad</h2>
+  <div class="features-grid">
+    <app-feature-card
+      icon="bolt"
+      title="Instant Multi-Tab Scratchpad"
+      description="Open straight into persistent local scratchpad buffers with zero sign-up, zero project wizard ceremony, and automatic crash-safe draft saving."
+    ></app-feature-card>
+    <app-feature-card
+      icon="code"
+      title="16+ Polyglot Syntax Grammars"
+      description="Dedicated BitSet-safe lexers for Kotlin/Java, C/Rust/Go, TypeScript/JS, Python, SQL, JSON, YAML, XML, HTML/CSS, Shell, INI/TOML, Diff, Log, URL, and Markdown."
+    ></app-feature-card>
+    <app-feature-card
+      icon="vertical_split"
+      title="Split-Screen GFM Markdown"
+      description="Author CommonMark and GitHub Flavored Markdown with live tables, code fences, interactive task checkboxes, and side-by-side split view on tablets & foldables."
+    ></app-feature-card>
+    <app-feature-card
+      icon="manage_search"
+      title="Regex Search & Capture Replace"
+      description="Navigate matches with auto-scroll highlighting, toggle case-sensitive or whole-word filters, and run $1 capture-group batch replacements."
+    ></app-feature-card>
+    <app-feature-card
+      icon="link"
+      title="RFC 3986 URL & Query Splitter"
+      description="Percent-encode or decode URI components and split dense OAuth redirect URLs onto clean multi-line key=value pairs—then join back in one tap."
+    ></app-feature-card>
+    <app-feature-card
+      icon="data_object"
+      title="Offline JSON Formatter & Minifier"
+      description="Pretty-print nested API responses with deterministic indentation or minify payloads for webhook testing using kotlinx-serialization-json."
+    ></app-feature-card>
+    <app-feature-card
+      icon="description"
+      title="Virtualized 25 MB Log Viewer"
+      description="Inspect multi-megabyte Kubernetes logs, crash dumps, and CSV exports smoothly via a bounded OOM-safe URI reader and virtualized LazyColumn viewport."
+    ></app-feature-card>
+    <app-feature-card
+      icon="folder_open"
+      title="Direct Android SAF File Editing"
+      description="Open, edit, and save files directly in place across local folders, SD cards, USB drives, and cloud document providers via Android Storage Access Framework."
+    ></app-feature-card>
+    <app-feature-card
+      icon="keyboard"
+      title="Docked Quick-Symbol Toolbar"
+      description="Insert brackets, braces, backticks, arrows, query delimiters, and indentation tokens effortlessly above the soft keyboard without hunting symbol layers."
+    ></app-feature-card>
+    <app-feature-card
+      icon="fingerprint"
+      title="100% Local & Biometric Lock"
+      description="Your source code, scratchpads, and tokens never touch Nanzen servers. Optionally guard workspace access with hardware-backed AndroidX BiometricPrompt."
+    ></app-feature-card>
+    <app-feature-card
+      icon="translate"
+      title="Native in 5 Languages"
+      description="Fully localized Material 3 interface across English, German (Deutsch), Spanish (Español), French (Français), and Swedish (Svenska)."
+    ></app-feature-card>
+    <app-feature-card
+      icon="workspace_premium"
+      title="LexPad Pro Studio Toolkit"
+      description="Unlock Dracula & Nord Dark palettes, full regex capture-group replace, multi-line URL/JSON power tools, adaptive split-screen Markdown, and biometric app lock."
+    ></app-feature-card>
+  </div>
+</section>
+
+<!-- App Screenshot Gallery Component -->
+<app-screenshot-showcase></app-screenshot-showcase>
+
+<!-- Interactive Code, Markdown & DevTools Studio Simulator -->
+<app-editor-studio-preview></app-editor-studio-preview>
+
+<section class="cta-section">
+  <h2>Ready for a fast, local-first code &amp; Markdown studio on Android?</h2>
+  <app-button
+    variant="primary"
+    href="https://play.google.com/store/apps/details?id=com.johnan.lexpad"
+    target="_blank"
+  >
+    <span class="material-icons" aria-hidden="true">android</span>
+    <span>Download on Google Play</span>
+  </app-button>
+  <br />
+  <a routerLink="/features" class="secondary-link">Explore the full feature matrix</a>
+</section>

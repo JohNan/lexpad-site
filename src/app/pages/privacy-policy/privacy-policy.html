@@ -1,0 +1,135 @@
+<article class="legal-content">
+  <h1>Privacy Policy for LexPad: File &amp; Code Editor</h1>
+  <p class="last-updated">Last updated: November 12, 2026</p>
+
+  <p>
+    This Privacy Policy describes how your information is handled in <strong>LexPad: File &amp; Code Editor</strong>
+    (package <code>com.johnan.lexpad</code>, referred to as the "App"), developed by <strong>Nanzen</strong>.
+  </p>
+
+  <p>
+    We respect your privacy and are committed to protecting it. Our architectural philosophy is built on client-side privacy,
+    local data ownership, and zero server storage of user files or document content.
+  </p>
+
+  <section>
+    <h2>Information Collection and Use</h2>
+    <p>
+      The App does not collect, transmit, or store any personal documents, source code, text files, or personally identifiable
+      information (PII) on Nanzen servers. No user account or cloud registration is required to use the App, and there is no advertising
+      tracking or personal profile building.
+    </p>
+  </section>
+
+  <section>
+    <h2>100% Local Document &amp; Scratchpad Storage</h2>
+    <p>All files, URLs, JSON payloads, and scratchpad buffers are processed and stored strictly locally on your device:</p>
+    <ul>
+      <li>
+        <strong>Scratchpad Buffers &amp; Drafts:</strong> Scratchpad buffers, unsaved drafts, and document metadata are stored
+        solely within the App's private internal storage (<code>filesDir/buffers/</code>). These files remain entirely on your device
+        and are never uploaded to any server.
+      </li>
+      <li>
+        <strong>Storage Access Framework (SAF):</strong> When opening, editing, or saving external files via Android's native file
+        picker (<code>OpenDocument</code> and <code>CreateDocument</code>), the App reads and writes content directly at the URI location
+        chosen by you. The App does not copy external files to remote servers or retain unauthorized background access.
+      </li>
+      <li>
+        <strong>Clipboard &amp; Developer Tools:</strong> All clipboard operations, percent-encoding/decoding, URL query parameter
+        splitting/joining, and JSON formatting/minifying occur strictly in-memory within the local device process.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Biometric App Lock &amp; Security</h2>
+    <p>You may optionally enable biometric authentication (fingerprint or face unlock) or device credentials to guard access to the App:</p>
+    <ul>
+      <li>
+        <strong>Hardware Keystore &amp; BiometricPrompt:</strong> The App uses the standard AndroidX <code>BiometricPrompt</code> API
+        provided by the Android operating system.
+      </li>
+      <li>
+        <strong>Secure Enclave Protection:</strong> Biometric authentication is performed locally by the Android OS hardware keystore
+        and secure enclave. Biometric templates, biometric sensor readings, and credentials never leave your device's hardware security
+        module and are never accessible to the App or Nanzen.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Third-Party Service Providers</h2>
+    <p>
+      To deliver in-app updates, optional Pro license upgrades, and ensure application stability, the App utilizes select third-party services.
+      These services may collect technical, non-personally identifiable device information and crash diagnostics:
+    </p>
+    <ul>
+      <li>
+        <strong>Google Play Services &amp; Google Play Billing:</strong> Facilitates seamless Google Play In-App Updates and manages optional
+        Pro upgrades (such as lifetime unlock <code>pro_version_unlock</code> and monthly subscription <code>pro_subscription_monthly</code>).
+        Google processes billing transactions according to Google's Privacy Policy.
+      </li>
+      <li>
+        <strong>Firebase Crashlytics:</strong> Collects anonymized crash diagnostics, stack traces, device hardware models, and operating system
+        versions to help us fix stability bugs and crashes.
+      </li>
+      <li>
+        <strong>Firebase Analytics:</strong> Collects aggregated, non-personally identifiable app usage statistics and session metrics to help us
+        prioritize features and performance optimizations.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Cookies and Tracking Identifiers</h2>
+    <p>
+      The App does not use cookies. Google Play Services and Firebase SDKs may use pseudonymous device identifiers or app instance IDs
+      strictly to facilitate update distribution, license verification, and aggregated diagnostics. You can manage or reset app identifiers
+      in your Android device settings.
+    </p>
+  </section>
+
+  <section>
+    <h2>Data Security</h2>
+    <p>
+      We value your trust and implement security best practices. All file reading and writing operations utilize Android's secure sandboxed
+      app storage and native Storage Access Framework permissions. No document contents, URLs, or scratchpad buffers ever route through
+      intermediate Nanzen proxy servers or cloud sync infrastructure.
+    </p>
+  </section>
+
+  <section>
+    <h2>Links to External Sites</h2>
+    <p>
+      The App or its documentation may contain links to external websites (such as open-source repositories, documentation, or developer resources).
+      If you tap an external link, you will be directed to that third-party site. These external sites are not operated by us, and we encourage you
+      to review their respective privacy policies. We assume no responsibility for the content or practices of any third-party websites.
+    </p>
+  </section>
+
+  <section>
+    <h2>Children's Privacy</h2>
+    <p>
+      The App is a developer utility and text editor and does not address anyone under the age of 13. We do not knowingly collect personally
+      identifiable information from children under 13. If you become aware that a child has provided personal information to third-party services
+      via the App, please contact us so that we can take appropriate measures.
+    </p>
+  </section>
+
+  <section>
+    <h2>Changes to This Privacy Policy</h2>
+    <p>
+      We may update our Privacy Policy from time to time to reflect application improvements or regulatory requirements. Any updates will be posted
+      on this page with a revised "Last updated" date.
+    </p>
+  </section>
+
+  <section>
+    <h2>Contact Us</h2>
+    <p>If you have any questions, suggestions, or concerns regarding this Privacy Policy, please contact us at:</p>
+    <p id="contact-email">
+      <a href="mailto:info&#64;nanzen.se">info&#64;nanzen.se</a>
+    </p>
+  </section>
+</article>

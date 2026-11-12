@@ -1,0 +1,183 @@
+/* Global Design System & Color Palette (Aligned with LexPad Electric Indigo & Obsidian Slate Material 3) */
+
+:root {
+  /* Brand & Logo Tokens */
+  --brand-logo-bg: #131722;
+  --brand-logo-accent: #818cf8;
+
+  /* Daylight Indigo Light Theme */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-secondary: #6366f1;
+  --color-tertiary: #d97706;
+  --color-emerald: #059669;
+  --color-background: #f6f8fc;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #eef2f8;
+  --color-glass-bg: rgba(255, 255, 255, 0.84);
+  --color-glass-border: rgba(15, 23, 42, 0.1);
+  --color-on-background: #0f172a;
+  --color-on-surface: #1e293b;
+  --color-border: rgba(15, 23, 42, 0.12);
+  --color-accent-badge-bg: rgba(79, 70, 229, 0.12);
+  --color-accent-badge-text: #3730a3;
+  --color-card-shadow: rgba(15, 23, 42, 0.08);
+}
+
+body.dark-theme {
+  /* Obsidian Slate & Electric Indigo Dark Theme (.stitch/DESIGN.md) */
+  --color-primary: #818cf8;
+  --color-primary-hover: #a5b4fc;
+  --color-secondary: #a5b4fc;
+  --color-tertiary: #f59e0b;
+  --color-emerald: #34d399;
+  --color-background: #0b0e14;
+  --color-surface: #131722;
+  --color-surface-elevated: #1c2230;
+  --color-glass-bg: rgba(19, 23, 34, 0.82);
+  --color-glass-border: rgba(229, 233, 240, 0.12);
+  --color-on-background: #e5e9f0;
+  --color-on-surface: #c8d0e0;
+  --color-border: #2a3241;
+  --color-accent-badge-bg: rgba(129, 140, 248, 0.16);
+  --color-accent-badge-text: #a5b4fc;
+  --color-card-shadow: rgba(0, 0, 0, 0.45);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  margin: 0;
+  padding: 0;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism Surface Utility */
+.glass-panel {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+}
+
+/* Typography Utility Classes */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  margin-top: 0;
+  letter-spacing: -0.015em;
+}
+
+.terminal-text,
+code,
+pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* App Button Global Styles & Encapsulation Overrides */
+app-button {
+  display: inline-block;
+
+  a.btn,
+  button.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    gap: 0.5rem;
+    text-decoration: none !important;
+    line-height: 1.2;
+    box-sizing: border-box;
+
+    &.primary {
+      background-color: var(--color-primary) !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+
+      body.dark-theme & {
+        color: #0b0e14 !important;
+        font-weight: 700;
+        box-shadow: 0 2px 12px rgba(129, 140, 248, 0.25);
+      }
+
+      *,
+      span,
+      .material-icons {
+        color: inherit !important;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      &:hover:not(.disabled) {
+        filter: brightness(0.96);
+        box-shadow: 0 6px 16px rgba(129, 140, 248, 0.32);
+      }
+    }
+
+    &.secondary {
+      background-color: var(--color-surface) !important;
+      color: var(--color-primary) !important;
+      border: 1px solid var(--color-border);
+
+      *,
+      span,
+      .material-icons {
+        color: inherit !important;
+      }
+    }
+
+    &.outlined {
+      background-color: transparent !important;
+      color: var(--color-primary) !important;
+      border: 1px solid var(--color-primary);
+
+      *,
+      span,
+      .material-icons {
+        color: inherit !important;
+      }
+    }
+  }
+}
+
+/* Accessibility */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  padding: 1rem;
+  background: var(--color-primary);
+  color: #ffffff;
+  z-index: 2000;
+  transition: top 0.2s;
+  text-decoration: none;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+main[tabindex='-1']:focus {
+  outline: none;
+}

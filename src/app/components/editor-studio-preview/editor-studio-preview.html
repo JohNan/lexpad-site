@@ -1,0 +1,354 @@
+<section class="editor-studio-section">
+  <div class="studio-header">
+    <span class="studio-badge">
+      <span class="material-icons" aria-hidden="true">terminal</span> Interactive Workspace Simulator
+    </span>
+    <h2>Experience LexPad Studio in Your Browser</h2>
+    <p>
+      Test-drive multi-tab syntax highlighting with regex capture-group replace, side-by-side GFM
+      Markdown checklists, RFC 3986 URL query splitting, and studio color palettes.
+    </p>
+
+    <!-- Mode & Theme Switcher Bar -->
+    <div class="controls-toolbar">
+      <div class="mode-tabs" role="tablist" aria-label="Editor Workspace Modes">
+        <button
+          id="tab-code"
+          type="button"
+          role="tab"
+          class="tab-btn"
+          [class.active]="activeTab === 'code'"
+          [attr.aria-selected]="activeTab === 'code'"
+          (click)="setTab('code')"
+        >
+          <span class="material-icons" aria-hidden="true">code</span> Code &amp; Regex
+        </button>
+        <button
+          id="tab-markdown"
+          type="button"
+          role="tab"
+          class="tab-btn"
+          [class.active]="activeTab === 'markdown'"
+          [attr.aria-selected]="activeTab === 'markdown'"
+          (click)="setTab('markdown')"
+        >
+          <span class="material-icons" aria-hidden="true">vertical_split</span> Split GFM Markdown
+        </button>
+        <button
+          id="tab-devtools"
+          type="button"
+          role="tab"
+          class="tab-btn"
+          [class.active]="activeTab === 'devtools'"
+          [attr.aria-selected]="activeTab === 'devtools'"
+          (click)="setTab('devtools')"
+        >
+          <span class="material-icons" aria-hidden="true">build_circle</span> URL &amp; JSON Tools
+        </button>
+      </div>
+
+      <div class="theme-switcher">
+        <span class="theme-label">Palette:</span>
+        <div class="theme-pills">
+          @for (t of themes; track t.id) {
+            <button
+              type="button"
+              class="theme-pill"
+              [class.active]="activeThemeId === t.id"
+              (click)="setTheme(t.id)"
+              [title]="'Switch to ' + t.name"
+            >
+              <span class="swatch" [style.background]="t.accent"></span>
+              <span>{{ t.name }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Studio Window Frame -->
+  <div
+    class="studio-frame"
+    [style.--studio-bg]="currentTheme.bg"
+    [style.--studio-surface]="currentTheme.surface"
+    [style.--studio-header]="currentTheme.header"
+    [style.--studio-text]="currentTheme.text"
+    [style.--studio-muted]="currentTheme.muted"
+    [style.--studio-accent]="currentTheme.accent"
+    [style.--studio-amber]="currentTheme.amber"
+    [style.--studio-emerald]="currentTheme.emerald"
+    [style.--studio-border]="currentTheme.border"
+  >
+    <!-- Top App / Buffer Tab Bar -->
+    <div class="studio-titlebar">
+      <div class="window-controls" aria-hidden="true">
+        <span class="control close"></span>
+        <span class="control minimize"></span>
+        <span class="control maximize"></span>
+      </div>
+
+      <div class="buffer-tabs">
+        <button
+          type="button"
+          class="buffer-chip"
+          [class.active]="activeTab === 'code'"
+          (click)="setTab('code')"
+        >
+          <span class="material-icons" aria-hidden="true">description</span> TokenStream.kt
+        </button>
+        <button
+          type="button"
+          class="buffer-chip"
+          [class.active]="activeTab === 'markdown'"
+          (click)="setTab('markdown')"
+        >
+          <span class="material-icons" aria-hidden="true">article</span> ARCHITECTURE.md
+        </button>
+        <button
+          type="button"
+          class="buffer-chip"
+          [class.active]="activeTab === 'devtools'"
+          (click)="setTab('devtools')"
+        >
+          <span class="material-icons" aria-hidden="true">data_object</span> oauth_payload.json
+        </button>
+      </div>
+
+      <div class="window-badges">
+        <span class="local-badge">
+          <span class="pulse-dot"></span> 100% Local • SAF Ready
+        </span>
+      </div>
+    </div>
+
+    <div class="studio-body">
+      <!-- 1. Multi-Tab Code & Live Regex Search/Replace -->
+      @if (activeTab === 'code') {
+        <div class="code-mode-content">
+          <div class="regex-bar">
+            <div class="regex-inputs">
+              <span class="regex-pill">.* Regex</span>
+              <code class="regex-expr">\bfun\s+(\w+)</code>
+              <span class="material-icons arrow-icon" aria-hidden="true">east</span>
+              <code class="regex-replace">suspend fun $1</code>
+            </div>
+            <div class="regex-actions">
+              <span class="match-counter">{{ activeMatchIndex + 1 }}/{{ matchCount }} matches</span>
+              <button
+                type="button"
+                class="mini-btn"
+                (click)="stepRegexMatch(-1)"
+                aria-label="Previous regex match"
+              >
+                <span class="material-icons" aria-hidden="true">keyboard_arrow_up</span>
+              </button>
+              <button
+                type="button"
+                class="mini-btn"
+                (click)="stepRegexMatch(1)"
+                aria-label="Next regex match"
+              >
+                <span class="material-icons" aria-hidden="true">keyboard_arrow_down</span>
+              </button>
+              <button type="button" class="apply-btn" (click)="toggleRegexReplace()">
+                <span class="material-icons" aria-hidden="true">{{
+                  regexReplaced ? 'undo' : 'find_replace'
+                }}</span>
+                <span>{{ regexReplaced ? 'Undo Replace' : 'Replace All ($1)' }}</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="code-editor-pane">
+            <div class="editor-gutter" aria-hidden="true">
+              <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span
+              ><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
+            </div>
+            <div class="editor-lines">
+              <div class="code-line">
+                <span class="tok-kw">package</span> com.lexpad.core.syntax
+              </div>
+              <div class="code-line">&nbsp;</div>
+              <div class="code-line">
+                <span class="tok-comment">// BitSet span guard prevents overlapping token allocations</span>
+              </div>
+              <div class="code-line">
+                <span class="tok-kw">object</span> <span class="tok-type">TokenStreamEngine</span> &#123;
+              </div>
+              <div class="code-line">
+                &nbsp;&nbsp;<span
+                  class="match-token"
+                  [class.active-match]="activeMatchIndex === 0 && !regexReplaced"
+                  ><span class="tok-kw">{{ regexReplaced ? 'suspend fun' : 'fun' }}</span>
+                  <span class="tok-fn">highlight</span></span
+                >(source: <span class="tok-type">String</span>): <span class="tok-type">List</span>&lt;<span class="tok-type">SyntaxSpan</span>&gt; &#123;
+              </div>
+              <div class="code-line">
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tok-kw">val</span> occupied =
+                <span class="tok-type">BitSet</span>(source.length)
+              </div>
+              <div class="code-line">
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="tok-kw">return</span> scanViewport(source, occupied)
+              </div>
+              <div class="code-line">&nbsp;&nbsp;&#125;</div>
+              <div class="code-line">
+                &nbsp;&nbsp;<span
+                  class="match-token"
+                  [class.active-match]="activeMatchIndex === 1 && !regexReplaced"
+                  ><span class="tok-kw">{{ regexReplaced ? 'suspend fun' : 'fun' }}</span>
+                  <span class="tok-fn">rulesFor</span></span
+                >(lang: <span class="tok-type">SyntaxLanguage</span>) = lang.compiledRules
+              </div>
+              <div class="code-line">
+                &nbsp;&nbsp;<span
+                  class="match-token"
+                  [class.active-match]="activeMatchIndex === 2 && !regexReplaced"
+                  ><span class="tok-kw">{{ regexReplaced ? 'suspend fun' : 'fun' }}</span>
+                  <span class="tok-fn">clearSpans</span></span
+                >() = <span class="tok-str">"0ms reset"</span>
+              </div>
+              <div class="code-line">&#125;</div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- 2. Split-Screen CommonMark / GFM Markdown -->
+      @if (activeTab === 'markdown') {
+        <div class="markdown-split-content">
+          <div class="md-source-pane">
+            <div class="pane-header">
+              <span class="material-icons" aria-hidden="true">edit_note</span>
+              <span>Markdown Source (GFM)</span>
+            </div>
+            <pre class="md-raw"><span class="tok-kw"># LexPad Architecture</span>
+
+| Module | Target | Footprint |
+| :--- | :--- | :--- |
+| `:editor-core` | Pure JVM | Zero Android deps |
+| `:editor-ui` | Compose | 60fps Canvas gutter |
+
+&#64;&#64; Interactive Release Checklist &#64;&#64;
+@for (task of markdownTasks; track task.id) {- [{{ task.done ? 'x' : ' ' }}] {{ task.label }}
+}</pre>
+          </div>
+
+          <div class="md-preview-pane">
+            <div class="pane-header">
+              <span class="material-icons" aria-hidden="true">visibility</span>
+              <span>Live Rendered Preview (Tap tasks to toggle)</span>
+            </div>
+            <div class="md-rendered">
+              <h3>LexPad Architecture</h3>
+              <table class="md-table">
+                <thead>
+                  <tr>
+                    <th>Module</th>
+                    <th>Target</th>
+                    <th>Footprint</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>:editor-core</code></td>
+                    <td>Pure JVM</td>
+                    <td>Zero Android deps</td>
+                  </tr>
+                  <tr>
+                    <td><code>:editor-ui</code></td>
+                    <td>Compose</td>
+                    <td>60fps Canvas gutter</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="md-checklist">
+                @for (task of markdownTasks; track task.id) {
+                  <label class="md-task-row">
+                    <input
+                      type="checkbox"
+                      [checked]="task.done"
+                      (change)="toggleMarkdownTask(task.id)"
+                    />
+                    <span [class.task-done]="task.done">{{ task.label }}</span>
+                  </label>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- 3. RFC 3986 URL Query Splitter & JSON Formatter -->
+      @if (activeTab === 'devtools') {
+        <div class="devtools-content">
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <div>
+                <span class="tool-tag">RFC 3986 URL Tool</span>
+                <h3>Query Splitter &amp; Percent-Decoder</h3>
+              </div>
+              <button type="button" class="apply-btn" (click)="toggleUrlSplit()">
+                <span class="material-icons" aria-hidden="true">swap_vert</span>
+                <span>{{ urlSplitMode ? 'Join Single-Line URL' : 'Split & Decode Params' }}</span>
+              </button>
+            </div>
+            @if (urlSplitMode) {
+              <pre class="tool-output">@for (line of splitUrlLines; track line) {{{ line }}
+}</pre>
+            } @else {
+              <pre class="tool-output wrap-url">{{ rawUrl }}</pre>
+            }
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-card-header">
+              <div>
+                <span class="tool-tag">kotlinx-serialization-json</span>
+                <h3>Deterministic JSON Formatter</h3>
+              </div>
+              <button type="button" class="apply-btn" (click)="toggleJsonPretty()">
+                <span class="material-icons" aria-hidden="true">auto_fix_high</span>
+                <span>{{ jsonPrettyMode ? 'Minify Payload' : 'Pretty-Print (2sp)' }}</span>
+              </button>
+            </div>
+            <pre class="tool-output">{{ jsonPrettyMode ? prettyJson : minifiedJson }}</pre>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Status Bar -->
+    <div class="studio-status-bar">
+      <div class="status-left">
+        <span class="status-indicator"></span>
+        <span>UTF-8 • LF • Kotlin / CommonMark GFM • filesDir/buffers/</span>
+      </div>
+      <div class="status-right">
+        <span>Ln 5, Col 18</span>
+        <span>palette: {{ currentTheme.name }}</span>
+      </div>
+    </div>
+
+    <!-- Docked Quick-Symbol Bar -->
+    <div class="quick-symbol-bar">
+      <span class="symbol-bar-title">Quick-Symbol Bar:</span>
+      <div class="symbol-scroll">
+        @for (sym of quickSymbols; track sym) {
+          <button
+            type="button"
+            class="symbol-chip"
+            (click)="insertSymbol(sym)"
+            [attr.aria-label]="'Insert symbol ' + sym"
+          >
+            {{ sym }}
+          </button>
+        }
+      </div>
+      @if (lastInsertedSymbol) {
+        <span class="symbol-feedback">Inserted {{ lastInsertedSymbol }}</span>
+      }
+    </div>
+  </div>
+</section>
