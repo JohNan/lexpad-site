@@ -1,0 +1,22 @@
+[tools]
+node = "22"
+
+[tasks.lint]
+run = "npm run lint"
+description = "Run Angular & TypeScript ESLint checks"
+
+[tasks.knip]
+run = "npm run knip"
+description = "Run Knip dead-code and unused-dependency check"
+
+[tasks.test]
+run = "npm run test -- --watch=false"
+description = "Run Vitest unit test suite"
+
+[tasks.build]
+run = "npm run build -- --configuration production"
+description = "Build production static SPA bundle with route fallbacks"
+
+[tasks.verify]
+run = "npm run lint && npm run knip && npm run test -- --watch=false && npm run build -- --configuration production"
+description = "Run full verification pipeline"
